@@ -14,4 +14,5 @@ pentru a pune in practica teoria pe care am citit-o si a intelege mai bine.
 
 # 19.06.2024
 Astazi am mai citit putin si am inceput sa scriu codul pentru bootloader. Am scris cod pentru a incarca un 
-kernel in memorie. Am intampinat o problema la testarea codului cu qemu.
+kernel in memorie. Am intampinat o problema la testarea codului cu qemu. Dupa ce am rezolvat problema si am reusit sa testez codul,
+am observat ca aveam niste probleme, asa ca am inceput sa il modific.
