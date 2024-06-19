@@ -11,3 +11,7 @@ Am terminat de citit mai multe resurse de pe internet, inclusiv ceea ce incepuse
 Am decis sa folosesc qemu pentru emularea procesorului si pentru a testa codul pentru bootloader.
 Am parcurs acest tutorial de pe git: https://github.com/cfenollosa/os-tutorial . Mi s-a parut foarte folositor 
 pentru a pune in practica teoria pe care am citit-o si a intelege mai bine.
+
+# 19.06.2024
+Astazi am mai citit putin si am inceput sa scriu codul pentru bootloader. Am scris cod pentru a incarca un 
+kernel in memorie. Am intampinat o problema la testarea codului cu qemu.
