@@ -17,3 +17,6 @@ Astazi am mai citit putin si am inceput sa scriu codul pentru bootloader. Am scr
 kernel in memorie. Am intampinat o problema la testarea codului cu qemu. Dupa ce am rezolvat problema si am reusit sa testez codul,
 am observat ca aveam niste probleme, asa ca am inceput sa il modific. 
 update: am rezolvat problema legata de cod, dar nu si cea legata de qemu.
+
+# 20.06.2024
+
