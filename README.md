@@ -19,4 +19,12 @@ am observat ca aveam niste probleme, asa ca am inceput sa il modific.
 update: am rezolvat problema legata de cod, dar nu si cea legata de qemu.
 
 # 20.06.2024
+Am avansat cu codul, dar am o problema pe care nu am reusit sa o rezolv astazi. Nu inteleg daca problema este la cum folosesc aplicatia qemu,
+sau la codul meu. Eu din codul pentru bootloader si pentru kernel creez o imagine de disk pe care o dau parametru la aplicatia qemu.
+Desi creez imaginea la fel cum fac si citirea kernelului, aplicatia imi spune ca nu il gaseste.
+dd if=/dev/zero of=disk.img bs=512 count=2880
+dd if=bootloader.bin of=disk.img bs=512 count=1 conv=notrunc
+dd if=kernel.bin of=disk.img bs=512 seek=1 conv=notrunc
+qemu-system-x86_64 -drive format=raw,file=disk.img
+
 
