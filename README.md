@@ -27,7 +27,7 @@ dd if=bootloader.bin of=disk.img bs=512 count=1 conv=notrunc
 dd if=kernel.bin of=disk.img bs=512 seek=1 conv=notrunc
 qemu-system-x86_64 -drive format=raw,file=disk.img
 
-# 20.06.2024
+# 21.06.2024
 Problema era cu comanda pe care o foloseam pentru aplicatia qemu. Dupa ce am mai cautat pe internet, am aflat ca ii lipsea un parametru.
 Trebuia sa specific ca folosesc un floppy-disk. Pentru ca nu specificam, incerca sa faca bootarea de pe un hard disk.
 Noua comanda:
