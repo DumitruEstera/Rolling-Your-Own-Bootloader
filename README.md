@@ -33,3 +33,12 @@ Trebuia sa specific ca folosesc un floppy-disk. Pentru ca nu specificam, incerca
 Noua comanda:
 qemu-system-x86_64 -drive format=raw,file=disk.img,index=0,if=floppy
 
+# 25.06.2026
+In weekend-ul care a trecut am imbunatatit codul. Dupa ce am mai citit cateva resurse pe internet, am scris codul 
+pentru a face trecerea de la real mode la protected mode. Am intampinat o problema la crearea unei tabele de descriptori temporala, necesara pentru a face trecerea in protected mode. Dupa ce am facut debugging, am observat ca atunci cand incerc sa creez gdt, codul se opreste. Am tot cautat pe internet, dar codul meu pare corect. Nu imi pot da seama unde este problema.
+Cateva resurse folosite:
+https://dev.to/frosnerd/writing-my-own-boot-loader-3mld
+https://stackoverflow.com/questions/71915188/failing-to-write-to-video-memory-in-32-bit-mode
+https://wiki.osdev.org/Protected_Mode
+https://c9x.me/x86/html/file_module_x86_id_156.html
+https://wiki.osdev.org/Rolling_Your_Own_Bootloader
