@@ -42,3 +42,7 @@ https://stackoverflow.com/questions/71915188/failing-to-write-to-video-memory-in
 https://wiki.osdev.org/Protected_Mode
 https://c9x.me/x86/html/file_module_x86_id_156.html
 https://wiki.osdev.org/Rolling_Your_Own_Bootloader
+
+# 26.06.2026
+Ieri si astazi am reusit sa rezolv problemele pe care le aveam. Mai exact problema descrisa ieri si inca o problema pe care am intalnit-o. (Dupa ce treceam in 32-bit protected mode, faceam un call la adresa la care incarcam kernelul in memorie. Aparent am calculat adresa gresit, dar astazi am rezolvat si problema aceasta). 
+Saptamana trecuta am creat si un Makefile pentru a fi mai usor de rulat codul. In codul bootloader-ului am pus si mesaje pentru a fi mai usor de urmarit executia lui.
