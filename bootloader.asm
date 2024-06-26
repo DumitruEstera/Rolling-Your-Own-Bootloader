@@ -1,23 +1,25 @@
-BITS 16           
-ORG 0x7C00      
+[BITS 16]
+[ORG 0x7C00]
+
 mov [BOOT_DRIVE], dl 
 mov bp, 0x9000
 mov sp, bp
+
 start:
     mov ax, 0x07C0
     add ax, 288      ; stack pointer
     mov ss, ax
     mov sp, 0x0100
 
-    ; afisare mesaj 
+    ; Display message 
     mov si, loading_msg
     call print_string
 
-    ; incarcam kernelul la 0x1000:0x0000
-    mov bx, 0x1000   
+    ; Load kernel at 0x1000:0x0000
+    mov bx, 0x1000  
     call load_kernel
 
-    ; mesaj ca kernelul s-a incarcat
+    ; Message that kernel loaded
     mov si, debugg_msg
     call print_string
 
@@ -26,10 +28,8 @@ start:
     or al, 2
     out 0x92, al
 
-    mov si, debugg_msg2     ; loading gdt...
+    mov si, debugg_msg2     ; Loading gdt...
     call print_string   
-
-%include 'gdt.asm'
 
     mov si, debugg_msg3     ; switching to 32 bit protected mode
     call print_string
@@ -57,13 +57,12 @@ init_32bit:
     mov esp, ebp
 
     call BEGIN_32BIT
+    
     jmp $
 
-    ;mov ax, 0x0F41   
-    ;mov [0xb8000], ax
-    ; sare la adresa kernelului
-    ;jmp 0x1000:0x0000
-    
+BEGIN_32BIT:
+    call 0x1000    ;Give control to the kernel
+    jmp $
 
 [bits 16]   
 load_kernel:
@@ -72,14 +71,14 @@ load_kernel:
     mov ch, 0        ; cilindrul 0
     mov dh, 0        ; head 0
     mov cl, 2        ; incepem sa citim din al doilea sector
-    mov dl, 0        ; floppy
+    mov dl, [BOOT_DRIVE]  ; use the boot drive
     int 0x13  
     jc disk_error   
-
+    
     ret
 
 disk_error:
-    ; afiseaza mesaj de eroare
+    ; Display error message
     mov si, error_msg
     call print_string
     hlt
@@ -95,19 +94,36 @@ print_string:
 .done:
     ret
 
-BEGIN_32BIT:
-    jmp 0x1000:0x0000 ; Give control to the kernel
-    jmp $ 
+print_in_32_bit:
+[bits 32] 
 
+print32:
+    pusha
+    mov edx, 0xb8000
+print32_loop:
+    mov al, [ebx] 
+    mov ah, 0x0f
+
+    cmp al, 0 
+    je print32_done
+
+    mov [edx], ax 
+    add ebx, 1 
+    add edx, 2 
+
+    jmp print32_loop
+
+print32_done:
+    popa
+    ret
 
 loading_msg db 'Loading kernel...', 0
-debugg_msg db 'Am incarcat kernelul.', 0
+debugg_msg db 'Kernel loaded.', 0
 debugg_msg2 db 'Loading GDT...', 0
 debugg_msg3 db 'Switching to 32-bit mode...', 0
 error_msg db 'Disk read error!', 0
 
+%include 'gdt.asm'
 BOOT_DRIVE db 0
-
-
 times 510-($-$$) db 0  
 dw 0xAA55 

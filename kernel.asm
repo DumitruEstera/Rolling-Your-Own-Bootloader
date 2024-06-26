@@ -1,8 +1,7 @@
 BITS 32
-ORG 0x0000
-VIDEO_MEMORY equ 0xb8000
-WHITE_ON_BLACK equ 0x0f 
+ORG 0x1000
 start:
+    mov ebx, kernel_msg
     call print32
 
     cli
@@ -10,19 +9,17 @@ start:
 
 print32:
     pusha
-    mov ebx, kernel_msg 
-    mov edx, VIDEO_MEMORY 
-
+    mov edx, 0xb8000
 print32_loop:
     mov al, [ebx] 
-    mov ah, WHITE_ON_BLACK 
+    mov ah, 0x0f
 
     cmp al, 0 
     je print32_done
 
     mov [edx], ax 
-    add ebx, 1
-    add edx, 2 
+    add ebx, 1 
+    add edx, 2
 
     jmp print32_loop
 
@@ -30,4 +27,4 @@ print32_done:
     popa
     ret
 
-kernel_msg db 'Hello from kernel!', 0
+kernel_msg db 'Hello from Kernel!', 0
