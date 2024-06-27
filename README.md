@@ -50,5 +50,4 @@ Inca cateva resurse folosite pe parcursul proiectului:
 https://wiki.osdev.org/Disk_access_using_the_BIOS_(INT_13h)
 https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf
 https://0xax.gitbooks.io/linux-insides/content/Booting/
-file:///home/estera/Downloads/ols.pdf
-
+https://www.almesberger.net/cv/papers/ols2k-9.pdf
