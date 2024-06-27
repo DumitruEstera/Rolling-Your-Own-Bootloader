@@ -51,3 +51,5 @@ https://wiki.osdev.org/Disk_access_using_the_BIOS_(INT_13h)
 https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf
 https://0xax.gitbooks.io/linux-insides/content/Booting/
 https://www.almesberger.net/cv/papers/ols2k-9.pdf
+https://wiki.osdev.org/Global_Descriptor_Table
+https://wiki.osdev.org/GDT_Tutorial
