@@ -1,15 +1,13 @@
 [BITS 16]
 [ORG 0x7C00]
 
-mov [BOOT_DRIVE], dl 
-mov bp, 0x9000
-mov sp, bp
-
+mov [BOOT_DRIVE], dl        ;drive number
+; creem stiva
+mov ax, 0x07C0
+add ax, 288         ; ne asiguram ca zonele de memorie nu se vor suprascrie
+mov ss, ax          ; stack segment cu valoarea 0x0870
+mov sp, 0x0100      ; stack pointer, offsetul de la care incepe stiva
 start:
-    mov ax, 0x07C0
-    add ax, 288      ; stack pointer
-    mov ss, ax
-    mov sp, 0x0100
 
     ; Display message 
     mov si, loading_msg
@@ -31,7 +29,7 @@ start:
     mov si, debugg_msg2     ; Loading gdt...
     call print_string   
 
-    mov si, debugg_msg3     ; switching to 32 bit protected mode
+    mov si, debugg_msg3     ; Switching to 32 bit protected mode
     call print_string
 
 switch_to_32bit:
@@ -95,21 +93,21 @@ print_string:
     ret
 
 print_in_32_bit:
-[bits 32] 
+[bits 32] ; using 32-bit protected mode
 
 print32:
     pusha
     mov edx, 0xb8000
 print32_loop:
-    mov al, [ebx] 
+    mov al, [ebx] ; [ebx] is the address of our character
     mov ah, 0x0f
 
-    cmp al, 0 
+    cmp al, 0 ; check if end of string
     je print32_done
 
-    mov [edx], ax 
-    add ebx, 1 
-    add edx, 2 
+    mov [edx], ax ; store character + attribute in video memory
+    add ebx, 1 ; next char
+    add edx, 2 ; next video memory position
 
     jmp print32_loop
 
@@ -122,7 +120,6 @@ debugg_msg db 'Kernel loaded.', 0
 debugg_msg2 db 'Loading GDT...', 0
 debugg_msg3 db 'Switching to 32-bit mode...', 0
 error_msg db 'Disk read error!', 0
-
 %include 'gdt.asm'
 BOOT_DRIVE db 0
 times 510-($-$$) db 0  
